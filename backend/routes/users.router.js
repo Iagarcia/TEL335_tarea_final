@@ -2,90 +2,106 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-// GET route for homepage
-router.get('/', function (req, res, next) {
-  return res.sendFile(path.join(__dirname + '/views/index.html'));
-});
-
-//POST route for updating data
-router.post('/', function (req, res, next) {
-  
-  if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Password doesn\'t match!');
-    err.status = 400;
-    res.send('Password doesn\'t match!');
-    return next(err);
-  }
-
-  if (req.body.email &&
-    req.body.username &&
-    req.body.password &&
-    req.body.passwordConf) {
-
-    var userData = {
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      passwordConf: req.body.passwordConf,
-    }
-
-    User.create(userData, function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        req.session.userId = user._id;
-        return res.redirect('/profile');
-      }
-    });
-
-  } else if (req.body.logemail && req.body.logpassword) {
-    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
-      if (error || !user) {
-        var err = new Error('Wrong email or password!');
-        err.status = 401;
-        return next(err);
-      } else {
-        req.session.userId = user._id;
-        return res.redirect('/profile');
-      }
-    });
-  } else {
-    var err = new Error('All fields are required!');
-    err.status = 400;
-    return next(err);
-  }
+router.use('/createUser', (req, res) => {
+	if (req.method === 'POST') {
+		console.log(req.query.email);
+		console.log(req.query.username);
+		console.log(req.query.password);
+		console.log(req.query.passwordConf);
+	
+		if (req.query.email && req.query.username && req.query.password && req.query.passwordConf) {
+			var userData = {
+				email: req.query.email,
+				username: req.query.username,
+				password: req.query.password,
+				passwordConf: req.query.passwordConf,
+			}
+			if (userData.password !== userData.passwordConf) {
+				res.status(400);
+				res.json({
+				"message": "Error. Password mismatch",
+				"success": false,
+				});
+			} else {
+				User.create(userData, function (error, user) {
+					if (error) {
+						res.status(400);
+						res.json({
+						"message": "Error. Create error",
+						"success": false,
+						"error": error,
+						});
+					} else {
+						res.json({
+							"message": "User's data has been registered",
+							"success": true,
+							"email": userData.email,
+							"username": userData.username,
+						});
+					}
+				});
+			}
+		} else {
+			res.status(400);
+			res.json({
+				"message": "Error. Need more args",
+				"success": false,
+			});
+		}
+	} else {
+		res.status(400);
+		res.json({
+			"message": "Error. Internal error. Invalid operation",
+			"success": false,
+		});
+	}
 })
 
-// GET route to redirect to '/profile' page after registering
-router.get('/profile', function (req, res, next) {
-  User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
-        } else {
-          return res.send('<h2>Your name: </h2>' + user.username + '<h2>Your email: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-        }
-      }
-    });
-});
+router.get('/authUser', (req, res) => {
+	User.authenticate(req.query.email, req.query.password, function (error, user) {
+		console.log(user);
+		if (error || !user) {
+			res.status(400);
+	        res.json({
+	            "message": "Error. Wrong mail or password",
+	            "success": false,
+	        }); 
+		} else {
+			req.session.userId = user._id;
+			res.json({
+				"message": "User's data has been authenticated",
+				"success": true,
+				"userData": user,
+			});
+		}
+	});
+})
 
-// GET for logout
-router.get('/logout', function (req, res, next) {
-  if (req.session) {
-    // delete session object
-    req.session.destroy(function (err) {
-      if (err) {
-        return next(err);
-      } else {
-        return res.redirect('/');
-      }
-    });
-  }
-});
+router.get('/getUser', (req, res) => {
+	console.log(req.session);
+	User.findById(req.session.userId).exec(function (error, user) {
+		if (error) {
+			res.status(400);
+		    res.json({
+				"message": "Error. Not find",
+				"success": false,
+			});
+		} else {
+			if (user === null) {
+				res.status(400);
+			    res.json({
+					"message": "Error. Not authorized",
+					"success": false,
+				});
+			} else {
+				res.json({
+					"message": "User's data has been authenticated",
+					"success": true,
+					"userData": user,
+				});
+			}
+		}
+	});
+})
 
 module.exports = router;
