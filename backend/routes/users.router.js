@@ -44,7 +44,7 @@ router.use('/createUser', (req, res) => {
 		} else {
 			res.status(400);
 			res.json({
-				"message": "Error. Need more args",
+				"message": "Error. invalid args",
 				"success": false,
 			});
 		}
@@ -71,7 +71,6 @@ router.get('/authUser', (req, res) => {
 			res.json({
 				"message": "User's data has been authenticated",
 				"success": true,
-				"userData": user,
 			});
 		}
 	});
@@ -97,11 +96,146 @@ router.get('/getUser', (req, res) => {
 				res.json({
 					"message": "User's data has been authenticated",
 					"success": true,
-					"userData": user,
+					"email": user.email,
+					"username": user.username,
+					"favorites": user.favorites,
 				});
 			}
 		}
 	});
+})
+
+router.post('/addFavorite', (req, res) => {
+	if (req.method === 'POST') {
+		if (req.query.movieId){
+			console.log(req.query.movieId);
+			User.findById(req.session.userId).exec(function (error, user) {
+				if (error) {
+					res.status(400);
+					res.json({
+						"message": "Error. Not find",
+						"success": false,
+					});
+				} else {
+					if (user === null) {
+						res.status(400);
+						res.json({
+							"message": "Error. Not authorized",
+							"success": false,
+						});
+					} else {
+						var new_favorites = user.favorites;
+						if (new_favorites.indexOf(req.query.movieId) === -1){
+							var new_favorites = user.favorites;
+							new_favorites.push(req.query.movieId);
+							User.update(
+								{email: user.email},
+								{favorites: new_favorites},
+								function(err, numberAffected, rawResponse) {
+									if (err){
+										console.log(err);
+									}
+								})
+							res.json({
+								"message": "User's data has been updated",
+								"success": true,
+								"email": user.email,
+								"username": user.username,
+								"favorites": user.favorites,
+							});
+						} else {
+                            res.json({
+                                "message": "Favorite already exist",
+                                "success": true,
+                                "email": user.email,
+                                "username": user.username,
+                                "favorites": user.favorites,
+                            });
+						}
+					}
+				}
+			});
+		} else {
+			res.status(400);
+			res.json({
+				"message": "Error. invalid args",
+				"success": false,
+			});
+		}
+	} else {
+		res.status(400);
+		res.json({
+			"message": "Error. Internal error. Invalid operation",
+			"success": false,
+		});
+	}
+})
+
+router.post('/removeFavorite', (req, res) => {
+    if (req.method === 'POST') {
+        if (req.query.movieId){
+            console.log(req.query.movieId);
+            User.findById(req.session.userId).exec(function (error, user) {
+                if (error) {
+                    res.status(400);
+                    res.json({
+                        "message": "Error. Not find",
+                        "success": false,
+                    });
+                } else {
+                    if (user === null) {
+                        res.status(400);
+                        res.json({
+                            "message": "Error. Not authorized",
+                            "success": false,
+                        });
+                    } else {
+                        var new_favorites = user.favorites;
+                        if (new_favorites.indexOf(req.query.movieId) != -1){
+                            var new_favorites = user.favorites;
+							var index = new_favorites.indexOf(req.query.movieId);
+                            new_favorites.splice(index, 1);
+                            User.update(
+                                {email: user.email},
+                                {favorites: new_favorites},
+                                function(err, numberAffected, rawResponse) {
+                                    if (err){
+                                        console.log(err);
+                                    }
+                                })
+                            res.json({
+                                "message": "User's data has been updated",
+                                "success": true,
+                                "email": user.email,
+                                "username": user.username,
+                                "favorites": user.favorites,
+                            });
+                        } else {
+                            res.json({
+                                "message": "Favorite does not exist",
+                                "success": true,
+                                "email": user.email,
+                                "username": user.username,
+                                "favorites": user.favorites,
+                            });
+                        }
+                    }
+                }
+            });
+        } else {
+            res.status(400);
+            res.json({
+                "message": "Error. invalid args",
+                "success": false,
+            });
+        }
+    } else {
+        res.status(400);
+        res.json({
+            "message": "Error. Internal error. Invalid operation",
+            "success": false,
+        });
+    }
 })
 
 module.exports = router;

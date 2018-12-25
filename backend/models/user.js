@@ -20,7 +20,8 @@ var UserSchema = new mongoose.Schema({
 	passwordConf: {
 		type: String,
 		required: true,
-	}
+	},
+	favorites: [Number],
 });
 
 // Authenticate input on database
