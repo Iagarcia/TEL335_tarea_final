@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Container, Content, Text, Button, Card, CardItem, List, ListItem, Left, Body } from 'native-base';
+const config = require('../config.json');
 
 export default class LinksScreen extends React.Component {
 	static navigationOptions = {
@@ -9,6 +10,24 @@ export default class LinksScreen extends React.Component {
 
 	handleAddFavorite = (_idMovie) =>{
 		console.log(_idMovie);
+		if (_idMovie){
+			fetch(config.urlserver+"/api/users/addFavorite?movieId="+_idMovie, {
+				credentials: "same-origin",
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then( res => res.json()).then( _res => {
+				console.log(_res);
+				if (_res.success === true){
+					alert("Titulo agregado a favoritos");
+				} else {
+					alert("Fallo al agregar a favoritos");
+				}
+			});
+		} else {
+			alert("Boton defectuoso");
+		}
 	}
 
 	render() {

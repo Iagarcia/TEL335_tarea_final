@@ -30,20 +30,24 @@ export default class FormExample extends Component {
 		console.log(emailLogin);
 		console.log(passwdLogin);
 		console.log(config.urlserver);
-		fetch(config.urlserver+"/api/users/authUser?email="+emailLogin+"&password="+passwdLogin, {
-			credentials: "same-origin",
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).then( res => res.json()).then( _res => {
-			console.log(_res);
-			if (_res.success === true){
-				alert("Sesión iniciada, Bienvenido: "+_res.username);
-			} else {
-				alert("Fallo al iniciar sesión");
-			}
-		});
+		if (emailLogin && passwdLogin){
+			fetch(config.urlserver+"/api/users/authUser?email="+emailLogin+"&password="+passwdLogin, {
+				credentials: "same-origin",
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then( res => res.json()).then( _res => {
+				console.log(_res);
+				if (_res.success === true){
+					alert("Sesión iniciada, Bienvenido: "+_res.username);
+				} else {
+					alert("Fallo al iniciar sesión");
+				}
+			});
+		} else {
+			alert("Rellene los campos");
+		}
 	}
 
 	handleChangeRegisterEmail = (_email) => {
@@ -69,6 +73,25 @@ export default class FormExample extends Component {
 		console.log(aliasRegister);
 		console.log(passwdRegister);
 		console.log(passwdConfRegister);
+		
+		if (emailRegister && aliasRegister && passwdRegister && passwdConfRegister){
+			fetch(config.urlserver+"/api/users/createUser?email="+emailRegister+"&username="+aliasRegister+"&password="+passwdRegister+"&passwordConf="+passwdConfRegister, {
+				credentials: "same-origin",
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then( res => res.json()).then( _res => {
+				console.log(_res);
+				if (_res.success === true){
+					alert("Cuenta registrada, Porfavor inicie sesión: "+_res.username);
+				} else {
+					alert("Fallo al registrar cuenta");
+				}
+			});
+		} else{
+			alert("Rellene los campos");
+		}
 	}
 	
 //	handleLogin = () => {
