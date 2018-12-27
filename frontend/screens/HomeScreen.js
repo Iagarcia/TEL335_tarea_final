@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { KeyboardAvoidingView, Container, Header, Content, Form, Item, Input, Text, Button, Body } from 'native-base';
+const config = require('../config.json');
 
 export default class FormExample extends Component {
   static navigationOptions = {
@@ -28,6 +29,21 @@ export default class FormExample extends Component {
 	    const { emailLogin, passwdLogin } = this.state;
 		console.log(emailLogin);
 		console.log(passwdLogin);
+		console.log(config.urlserver);
+		fetch(config.urlserver+"/api/users/authUser?email="+emailLogin+"&password="+passwdLogin, {
+			credentials: "same-origin",
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then( res => res.json()).then( _res => {
+			console.log(_res);
+			if (_res.success === true){
+				alert("Sesión iniciada, Bienvenido: "+_res.username);
+			} else {
+				alert("Fallo al iniciar sesión");
+			}
+		});
 	}
 
 	handleChangeRegisterEmail = (_email) => {

@@ -71,6 +71,7 @@ router.get('/authUser', (req, res) => {
 			res.json({
 				"message": "User's data has been authenticated",
 				"success": true,
+				"username": user.username
 			});
 		}
 	});

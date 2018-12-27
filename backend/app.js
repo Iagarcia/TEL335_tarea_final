@@ -31,10 +31,12 @@ app.use(session({
 app.use('/api/', routes);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.json({
+		"message": "Hello, World!"
+	});
 });
 
 app.listen(PORT, () => {
-    console.log('¡Bienvenido a la API de Eustace 🚗 🚓 🚕  !');
+    console.log('¡Bienvenido 🚗 🚓 🚕  !');
     console.log('Corriendo en el puerto ' + PORT);
 });

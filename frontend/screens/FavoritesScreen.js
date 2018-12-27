@@ -1,19 +1,35 @@
 import React from 'react';
 import { Card, CardItem, Button, Container, Header, Content, List, ListItem, Text, Left, Right, Body} from 'native-base';
+const config = require('../config.json');
 
 export default class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Favoritos',
-  };
+	static navigationOptions = {
+		title: 'Favoritos',
+	};
 
-    handleRemoveFavorite = (_idMovie) =>{
-        console.log(_idMovie);
-    }
+	handleRemoveFavorite = (_idMovie) =>{
+		console.log(_idMovie);
+	}
 
 
-  render() {
+	render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config */
+	
+		fetch(config.urlserver+"/api/users/getUser", {
+		credentials: "same-origin",
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+		}).then( res => res.json()).then( _res => {
+			console.log(_res);
+			if (_res.success === true){
+				alert("Sesión iniciada, Bienvenido: "+_res.username);
+			} else {
+				alert("Inicie sesión para ver favoritos");
+			}
+		});
 	
 	var movies = [
 		{
