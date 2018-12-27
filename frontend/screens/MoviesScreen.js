@@ -7,6 +7,10 @@ export default class LinksScreen extends React.Component {
 		title: 'Peliculas',
 	};
 
+	handleAddFavorite = (_idMovie) =>{
+		console.log(_idMovie);
+	}
+
 	render() {
 
 		return (
@@ -25,7 +29,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(297802)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -43,7 +47,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(424783)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -61,7 +65,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(405774)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -79,7 +83,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(507562)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -97,7 +101,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(335983)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -115,7 +119,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(324857)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -133,7 +137,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(338952)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -151,7 +155,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(480530)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -169,7 +173,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(503314)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -187,7 +191,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(346910)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -205,7 +209,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(463272)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -223,7 +227,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(454293)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -241,7 +245,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(299536)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -259,7 +263,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(428078)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -277,7 +281,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(375588)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -295,7 +299,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(446021)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -313,7 +317,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(424694)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -331,7 +335,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(400650)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -349,7 +353,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(424139)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>
@@ -367,7 +371,7 @@ export default class LinksScreen extends React.Component {
 				</CardItem>
 				<Body>
 				<CardItem>
-						<Button block dark>
+						<Button block dark onPress={() => this.handleAddFavorite(9714)}>
 							<Text>Agregar a Favoritos</Text>
 						</Button>
 				</CardItem>

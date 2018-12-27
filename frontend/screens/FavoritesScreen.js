@@ -6,6 +6,11 @@ export default class SettingsScreen extends React.Component {
     title: 'Favoritos',
   };
 
+    handleRemoveFavorite = (_idMovie) =>{
+        console.log(_idMovie);
+    }
+
+
   render() {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config */
@@ -13,11 +18,11 @@ export default class SettingsScreen extends React.Component {
 	var movies = [
 		{
 		'title': 'Dragon Ball Super: Broly',
-		'id': 1
+		'id': 503314
 		},
 		{
 		'title': 'Halloween',
-		'id': 2
+		'id': 424139
 		}
 	]
 
@@ -37,7 +42,7 @@ export default class SettingsScreen extends React.Component {
 		                </Left>
 		                <Right>
 		                <CardItem>
-		                        <Button block dark>
+		                        <Button block dark onPress={() => this.handleRemoveFavorite(movie.id)}>
 		                            <Text>Remover de Favoritos</Text>
 		                        </Button>
 		                </CardItem>
