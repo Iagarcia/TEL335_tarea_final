@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Container, Header, Content, Form, Item, Input, Text, Button } from 'native-base';
+import { KeyboardAvoidingView, Container, Header, Content, Form, Item, Input, Text, Button, Body } from 'native-base';
 
 export default class FormExample extends Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
 	state = {
 		email: null,
 		passwd: null
@@ -38,13 +42,13 @@ export default class FormExample extends Component {
 
 	render() {
 		return (
-		<KeyboardAvoidingView behavior="padding" enabled>
 		<Container>
-		<Header />
 		<Content>
-			<Text style={{justifyContent: 'center'}}>
-				Iniciar Sesión
-			</Text>
+			<Body>
+				<Text style={{justifyContent: 'center'}}>
+					Iniciar Sesión
+				</Text>
+			</Body>
 			<Form>
 				<Item>
 					<Input placeholder="E-mail" onChangeText={this.handleChangeEmail} />
@@ -56,9 +60,11 @@ export default class FormExample extends Component {
 			<Button block dark onPress={this.handleLogin}>
 				<Text>Entrar</Text>
 			</Button>
-			<Text>
-				Registrar cuenta
-			</Text>
+			<Body>
+				<Text>
+					Registrar cuenta
+				</Text>
+			</Body>	
 			<Form>
 				<Item>
 					<Input placeholder="E-mail" onChangeText={this.handleChangeEmail} />
@@ -76,10 +82,8 @@ export default class FormExample extends Component {
 			<Button block dark onPress={this.handleRegister}>
 				<Text>Registrar</Text>
 			</Button>
-
 		</Content>
 		</Container>
-		</KeyboardAvoidingView>
 		);
 	}
 }
