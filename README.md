@@ -28,8 +28,10 @@ $ npm install
 
 ## Preparar frontend
 
-Se debe instalar los paquetes necesarios y establecer la IP del servidor (Debe ser accesible mediante la red)
+Se debe instalar los paquetes necesarios y establecer la IP del servidor (Debe ser accesible mediante la red). Luego ejecutar la aplicacion en el dispositivo movil.
 
 $ cd TEL335_tarea_final/frontend
 
 $ npm install
+
+$ expo start
