@@ -20,11 +20,15 @@ $ git@github.com:Iagarcia/TEL335_tarea_final.git
 
 ## Preparar backend
 
+Node 10.x
+
 Se debe instalar los paquetes necesarios.
 
 $ cd TEL335_tarea_final/backend
 
 $ npm install
+
+$ node app.js
 
 ## Preparar frontend
 
